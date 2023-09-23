@@ -521,7 +521,7 @@ The product reference identifies and categorizes a certain production channel
 ## Attributes
 
 ### KeyLabel attribute
-Attributes in which may define a key (Integer, string, decimal, boolean) and a value
+Attributes in which may define a key (Integer, string, decimal, boolean) and a label
 
 #### Fields
 |Field| Description | Values|
@@ -538,7 +538,7 @@ Attributes in which may define a key (Integer, string, decimal, boolean) and a v
 |`items.key`| key for a certain attribute item. This key is unique in a certain attribute type (color...) ||
 
 
-#### Example of keyValue attributes
+#### Example of keyLabel attributes
 ```json
 {
     "id" : "urn:brand:<zara-id>:label-value-attribute:<color-key-label-attribute>",
