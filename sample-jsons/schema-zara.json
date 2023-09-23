@@ -1,0 +1,165 @@
+{
+    "id" : "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>",
+    "name" : "Clothes Zara Schema",
+    "productType" : {
+        "id" : "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>",
+        "name" : "Clothes Zara"
+    },
+    "categories" : ["section","buyer","family","subfamily"],
+    "attributes" : [
+        {
+            "id" : "urn:zara:ropa:attribute:<model-type-id>",
+            "name" : "model",
+            "type" : "Label",
+            "variant" : "NOT_VARIABLE",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<model-type-id>",
+            "name" : "quality",
+            "type" : "Label",
+            "variant" : "NOT_VARIABLE",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<color-type-id>",
+            "name" : "color",
+            "type" : "LabelValue",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<size-type-id>",
+            "name" : "size",
+            "type" : "Label",
+            "variant" : "UNIQUE_GROUP",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<ebom-reference-type-id>",
+            "name" : "ebom",
+            "type" : "EbomResourceReference",
+            "variant" : "UNIQUE_GROUP",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<base-price-type-id>",
+            "name" : "basePrice",
+            "type" : "Label",
+            "variant" : "NOT_VARIABLE",
+            "multivaluated" : false,
+            "mandatory" : false
+
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<size-system-type-id>",
+            "name" : "sizeSystem",
+            "type" : "Label",
+            "variant" : "NOT_VARIABLE",
+            "multivaluated" : false,
+            "mandatory" : true
+
+
+        }
+
+
+    ],
+    "states" : [
+        {
+            "id" : "urn:brand:<zara-id>:product-state-types:<clothes-state-type-id>",
+            "name" : "ClothesState",
+            "in" : "BOTH",
+            "values" : ["DEVELOPMENT","OK"],
+            "initial": "DEVELOPMENT",
+            "transitions" : [
+                {
+                    "id" : "<comercial-state-transition-1>",
+                    "from" : "DEVELOPMENT",
+                    "to" : "OK"
+                }
+            ]
+        },
+        {
+            "id" : "urn:brand:<zara-id>:product-state-types:<commercial-state-type-id>",
+            "name" : "CommercialState",
+            "in" : "VARIANT",
+            "values" : ["DRAFT","PENDING COMMERCIAL","PENDING DEVELOPMENT","OK"],
+            "transitions" : [
+                {
+                    "id" : "<comercial-state-transition-1>",
+                    "from" : "DRAFT",
+                    "to" : "PENDING COMMERCIAL"
+                },
+                {
+                    "id" : "<comercial-state-transition-1>",
+                    "from" : "DRAFT",
+                    "to" : "PENDING DEVELOPMENT"
+                },
+                {
+                    "id" : "<comercial-state-transition-3>",
+                    "from" : "PENDING DEVELOPMENT",
+                    "to" : "OK"
+                },
+                {
+                    "id" : "<comercial-state-transition-3>",
+                    "from" : "PENDING COMMERCIAL",
+                    "to" : "OK"
+                }
+            ]
+        }
+    ],
+    "references" : [
+        {
+            "id" : "urn:zara:ropa:attribute:<model-type-id>",
+            "name" : "model",
+            "inherited" : "DEFAULT",
+            "restriction": "UNIQUE_GROUP",
+            "visible": true
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<model-type-id>",
+            "name" : "quality",
+            "inherited" : "DEFAULT",
+            "restriction": "UNIQUE_GROUP",
+            "visible": true
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<color-type-id>",
+            "name" : "color",
+            "inherited" : "ALWAYS",
+            "restriction": "UNIQUE_GROUP",
+            "visible": true
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<size-type-id>",
+            "name" : "size",
+            "inherited" : "ALWAYS",
+            "restriction": "UNIQUE_GROUP",
+            "visible": true
+
+        },
+        {
+            "id" : "urn:zara:ropa:attribute:<ebom-reference-type-id>",
+            "name" : "ebom",
+            "type" : "EbomResourceReference",
+            "restriction": "NOT_RESTRICTION",
+            "visible": false
+        }
+    ]
+}
