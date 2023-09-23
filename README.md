@@ -13,6 +13,17 @@
 
 ## Product type schema
 
+The product schema defines:
+* The categories that the product may define
+* The attributes that the product may define
+* The attributes that the variant may define
+* The attributes that the reference may define
+* The states that the product may have and the flow restrictions of them
+* The restrictions of the attributes in product, variant and references
+
+
+### Fields description of product schema
+
 | Field                       | Description                                                                                                                                                                      | Values                                                                                                                                                                                                                                                                                                                                                                                          |
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                        | product schema id                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -39,6 +50,8 @@
 | `references`.`inherited`    | define if the reference tooks the product/variant attribute if it´s defined                                                                                                      | **ALWAYS**(The value of the attribute is inherited from product/variant and can´t be changed), **NEVER**(The attribute value never can be the same that its product/variant), **DEFAULT** (the value of attribute is the same that the product/variant if exists but it can be edited). **ALWAYS** only may exists if is defined in the product or variant                                      |
 | `references`.`restriction`| Defines reference attributes restriction| **UNIQUE** (Unique in all product references), **UNIQUE_GROUP**(Combination of all unique_group must be unique in all product references ), **NO_RESTRICTION** ()|
 |`references`.`visible`| Define if attribute reference is visible ||
+
+### Example of product type schema
 
 ```json
 {
@@ -212,6 +225,8 @@
 ## Product
 The product object has the general information of the product, the list of attributes that define it and its variants and the posible states 
 
+### Fields description of product
+
 |Field|Description|Values|
 |:---|:---|:---|
 |`id`|Product id||
@@ -232,10 +247,7 @@ The product object has the general information of the product, the list of attri
 |`variants.attributes`| `Array` List of the attributes of a variant (same valueType logic that exists in product root attributes) ||
 |`variants.states`| `Array` List of custom states defined in product schema implemented for a variant | | 
 
-
-
-
-
+### Example of product 
 
 ```json
 {
@@ -378,6 +390,7 @@ The product object has the general information of the product, the list of attri
 ## Product reference
 The product reference identifies and categorizes a certain production channel
 
+### Fields description of product reference
 |Field| Description | Values|
 |:---|:---| :---|
 |`id`| domain identification||
