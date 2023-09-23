@@ -1,0 +1,37 @@
+{
+    "id" : "urn:brand:<zara-id>:label-value-attribute:<model-label-attribute>",
+    "name" : "model",
+    "keyName" : "Model", 
+    "productTypeIds": [
+        "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
+        "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
+    ],
+    "items" : [
+        {
+            "id" : "<id-model-4004>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "4004"
+
+        },
+        {
+            "id" : "<id-model-4005>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "4005"
+
+        },
+        {
+            "id" : "<id-model-3002>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "3002"
+
+        }
+
+
+    ]
+}

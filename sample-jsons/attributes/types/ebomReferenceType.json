@@ -1,0 +1,9 @@
+{
+    "name" : "ebom",
+    "valueType" : "EbomResourceReference",
+    "value" : {
+        "resourceType" : "ebom",
+        "resourceId" : "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+        "name" : "EBOM de pantalón de algodon"
+    }  
+}

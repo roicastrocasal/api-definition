@@ -1,0 +1,44 @@
+{
+    "id" : "urn:brand:<zara-id>:label-value-attribute:<color-key-label-attribute>",
+    "name" : "color",
+    "keyName" : "Color", 
+    "productTypeIds": [
+        "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
+        "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
+    ],
+    "keyDataType": "Integer",
+    "items" : [
+        {
+            "id" : "<id-color-900>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "Black",
+            "key" : 900
+
+        },
+        {
+            "id" : "<id-color-701>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "Blue",
+            "key" : 701
+
+        },
+        {
+            "id" : "<id-color-705>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-woman-id>"
+            ],
+            "label": "Blue W",
+            "key" : 705
+
+        }
+
+
+    ]
+
+
+
+}

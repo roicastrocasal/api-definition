@@ -1,0 +1,8 @@
+{
+    "name" : "color",
+    "valueType" : "KeyLabel",
+    "value" : {
+        "key" : 901,
+        "label" : "Blue"
+    }
+}

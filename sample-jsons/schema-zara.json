@@ -30,7 +30,7 @@
         {
             "id" : "urn:zara:ropa:attribute:<color-type-id>",
             "name" : "color",
-            "type" : "LabelValue",
+            "type" : "KeyLabel",
             "multivaluated" : false,
             "mandatory" : true
 
@@ -127,6 +127,7 @@
         {
             "id" : "urn:zara:ropa:attribute:<model-type-id>",
             "name" : "model",
+            "type" : "Label",
             "inherited" : "DEFAULT",
             "restriction": "UNIQUE_GROUP",
             "visible": true
@@ -134,6 +135,7 @@
         {
             "id" : "urn:zara:ropa:attribute:<model-type-id>",
             "name" : "quality",
+            "type" : "Label",
             "inherited" : "DEFAULT",
             "restriction": "UNIQUE_GROUP",
             "visible": true
@@ -141,6 +143,7 @@
         {
             "id" : "urn:zara:ropa:attribute:<color-type-id>",
             "name" : "color",
+            "type" : "KeyLabel",
             "inherited" : "ALWAYS",
             "restriction": "UNIQUE_GROUP",
             "visible": true
@@ -149,6 +152,7 @@
         {
             "id" : "urn:zara:ropa:attribute:<size-type-id>",
             "name" : "size",
+            "type" : "Label",
             "inherited" : "ALWAYS",
             "restriction": "UNIQUE_GROUP",
             "visible": true

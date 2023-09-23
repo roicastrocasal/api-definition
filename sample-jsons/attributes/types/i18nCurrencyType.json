@@ -1,0 +1,9 @@
+{
+    "name" : "basePrice",
+    "valueType" : "i18nCurrency",
+    "value" : {
+        "currency" : "€",
+        "amount" : 10.99,
+        "locale" : "es-ES"
+    }
+}

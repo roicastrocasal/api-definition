@@ -34,7 +34,8 @@
             "valueType" : "i18nCurrency",
             "value" : {
                 "currency" : "€",
-                "value" : 10.99
+                "amount" : 10.99,
+                "locale" : "es-ES"
             }
         },
         {
@@ -56,9 +57,9 @@
             "attributes" : [
                 {
                     "name" : "color",
-                    "valueType" : "LabelValue",
+                    "valueType" : "KeyLabel",
                     "value" : {
-                        "value" : 906,
+                        "key" : 906,
                         "label" : "Black"
                     }
                 },
@@ -69,8 +70,8 @@
                     
                 },
                 {
-                    "name" : "size",
-                    "valueType" : "Resource",
+                    "name" : "ebom",
+                    "valueType" : "EbomResourceReference",
                     "value" : {
                         "resourceType" : "ebom",
                         "resourceId" : "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
@@ -96,9 +97,9 @@
             "attributes" : [
                 {
                     "name" : "color",
-                    "valueType" : "LabelValue",
+                    "valueType" : "KeyLabel",
                     "value" : {
-                        "value" : 901,
+                        "key" : 901,
                         "label" : "Blue"
                     }
                 },

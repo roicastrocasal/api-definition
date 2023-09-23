@@ -9,6 +9,9 @@
 ### 3. [Product reference](#product-reference)
 * #### 3.1 [Fields description](#fields-description-of-product-reference)
 * #### 3.2 [Sample JSON](#example-of-reference)
+### 4. [Attributes](#attributes)
+* #### 3.1 [KeyLabel attributes](#keylabel-attribute)
+* #### 3.2 [Label attributes](#label-attribute)
 
 
 ## Product type schema
@@ -24,30 +27,30 @@ The product schema defines:
 
 ### Fields description of product schema
 
-| Field                       | Description                                                                                                                                                                      | Values                                                                                                                                                                                                                                                                                                                                                                                          |
-| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                        | product schema id                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `productType`               | product type for which the schema exists. This product type is provided by categories BC                                                                                         | Clothes type, Fabrics type...                                                                                                                                                                                                                                                                                                                                                                   |
-| `categories`                | Set of Categories node types provided by categories BC which we can associate to a certain product   that implements this schema                                                 | Section, buyer, family, first commercial attribute, second commercial attribute...                                                                                                                                                                                                                                                                                                              |
-| `attributes`                | List of attributes that we can associate to a products roots or to their variants                                                                                                | Model, quality, color...                                                                                                                                                                                                                                                                                                                                                                        |
-| `attributes`.`id`           | Id of attribute value (only in AttributeTypes with key)                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `attributes`.`name`         | Attributte name (We can´t add more than one attribute with same name in a certain schema)                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `attribute`.`type`          | Type of attribute                                                                                                                                                                | **Label** (Enumerate string selected from a predefined set of values), **ValueLabel** (Enumerate string with key-value selected from a predefined set of values), **EbomResourceReference**  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, **i18nCurrency** (Decimal that represents currency ammount in his i18n representation)... |
-| `attribute`.`variant`       | Defines if current attribute is a variant attribute and its restriction                                                                                                          | **NOT_VARIABLE** (Doesn´t define variant). **UNIQUE** (Unique in all its variants), **UNIQUE_GROUP**(Combination of all unique_group must be unique), **NO_RESTRICTION** (Conforms variant without restriction). *Only **NOT_VARIABLE** AND **WITHOUT_RESTRICTION** can be `mandatory: false`.                                                                                                  |
-| `attribute`.`multivaluated` | `Boolean` Defines if current attribute can be multivaluated. Multivaluated fields can´t be `reference: true` and can´t be `variable: UNIQUE` or `variable: UNIQUE_GROUP` neither |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `attribute`.`mandatory`     | `Boolean` Defines if attribute definition is mandatory                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `states`                    | Object in which can define custom states of product root or variants with it´s allowed flow configuration                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `states`.`id`               | Custom state id                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `states`.`name`             | Custom state name                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`in`                | where state can be present                                                                                                                                                       | PRODUCT_ROOT, VARIANT, BOTH                                                                                                                                                                                                                                                                                                                                                                     |
-| `state`.`values`            | Set of values ​​that the state can have                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`initial`           | Initial value of state                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`transitions`       | `Object` that configure the allowed transitions that the state can present                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`transitions.id`    | Id of transition                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`transitions.from`  | Custom state where transition starts                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `state`.`transitions.to`    | Custom state where transition ends                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `references`                | `Object` that define a set of attributes that can be used to generate product references                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `references`.`inherited`    | define if the reference tooks the product/variant attribute if it´s defined                                                                                                      | **ALWAYS**(The value of the attribute is inherited from product/variant and can´t be changed), **NEVER**(The attribute value never can be the same that its product/variant), **DEFAULT** (the value of attribute is the same that the product/variant if exists but it can be edited). **ALWAYS** only may exists if is defined in the product or variant                                      |
+| Field| Description| Values |
+| :---- | :--- | :--- |
+| `id` | product schema id  | |
+| `productType`| product type for which the schema exists. This product type is provided by categories BC | Clothes type, Fabrics type... |
+| `categories` | Set of Categories node types provided by categories BC which we can associate to a certain product   that implements this schema | Section, buyer, family, first commercial attribute, second commercial attribute... |
+| `attributes` | List of attributes that we can associate to a products roots or to their variants | Model, quality, color... |
+| `attributes`.`id` | Id of attribute value (only in AttributeTypes with key) |   |
+| `attributes`.`name` | Attributte name (We can´t add more than one attribute with same name in a certain schema) |   |
+| `attribute`.`type` | Type of attribute | [**Label**](./sample-jsons/attributes/types/LabelType.json) (Enumerate string selected from a predefined set of values), [**KeyLabel**](./sample-jsons/attributes/types/KeyLabelType.json) (Enumerate string with key-value selected from a predefined set of values), [**EbomResourceReference**](./sample-jsons/attributes/types/ebomReferenceType.json)  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, [**i18nCurrency**](./sample-jsons/attributes/types/i18nCurrencyType.json) (Decimal that represents currency ammount in his i18n representation)... |
+| `attribute`.`variant` | Defines if current attribute is a variant attribute and its restriction | **NOT_VARIABLE** (Doesn´t define variant). **UNIQUE** (Unique in all its variants), **UNIQUE_GROUP**(Combination of all unique_group must be unique), **NO_RESTRICTION** (Conforms variant without restriction). *Only **NOT_VARIABLE** AND **WITHOUT_RESTRICTION** can be `mandatory: false`. |
+| `attribute`.`multivaluated` | `Boolean` Defines if current attribute can be multivaluated. Multivaluated fields can´t be `reference: true` and can´t be `variable: UNIQUE` or `variable: UNIQUE_GROUP` neither |      |
+| `attribute`.`mandatory` | `Boolean` Defines if attribute definition is mandatory  |  |
+| `states` | Object in which can define custom states of product root or variants with it´s allowed flow configuration |   |
+| `states`.`id` | Custom state id |   |
+| `states`.`name` | Custom state name |     |
+| `state`.`in` | where state can be present    | PRODUCT_ROOT, VARIANT, BOTH |
+| `state`.`values` | Set of values ​​that the state can have | |
+| `state`.`initial` | Initial value of state  | |
+| `state`.`transitions` | `Object` that configure the allowed transitions that the state can present  |  |
+| `state`.`transitions.id` | Id of transition   | |
+| `state`.`transitions.from` | Custom state where transition starts  |    |
+| `state`.`transitions.to` | Custom state where transition ends  | |
+| `references` | `Object` that define a set of attributes that can be used to generate product references  |  |
+| `references`.`inherited` | define if the reference tooks the product/variant attribute if it´s defined | **ALWAYS**(The value of the attribute is inherited from product/variant and can´t be changed), **NEVER**(The attribute value never can be the same that its product/variant), **DEFAULT** (the value of attribute is the same that the product/variant if exists but it can be edited). **ALWAYS** only may exists if is defined in the product or variant |
 | `references`.`restriction`| Defines reference attributes restriction| **UNIQUE** (Unique in all product references), **UNIQUE_GROUP**(Combination of all unique_group must be unique in all product references ), **NO_RESTRICTION** ()|
 |`references`.`visible`| Define if attribute reference is visible ||
 
@@ -86,7 +89,7 @@ The product schema defines:
         {
             "id" : "urn:zara:ropa:attribute:<color-type-id>",
             "name" : "color",
-            "type" : "LabelValue",
+            "type" : "KeyLabel",
             "multivaluated" : false,
             "mandatory" : true
 
@@ -240,7 +243,7 @@ The product object has the general information of the product, the list of attri
 |`categories`| Defined Category ids  according schema declaration||
 |`productAttributes`| `Array` Defined product root attributes according the schema.||
 |`productAttributes.name`| Attribute name unique by schema. With the definition of the schema you can resolve the attribute by its name ||
-|`productAttributes.valueType`| Value type of current attribute. | **Label** (Enumerate string selected from a predefined set of values), **ValueLabel** (Enumerate string with key-value selected from a predefined set of values), **EbomResourceReference**  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, **i18nCurrency** (Decimal that represents currency ammount in his i18n representation)... |
+|`productAttributes.valueType`| Value type of current attribute. | [**Label**](./sample-jsons/attributes/types/LabelType.json) (Enumerate string selected from a predefined set of values), [**KeyLabel**](./sample-jsons/attributes/types/KeyLabelType.json) (Enumerate string with key-value selected from a predefined set of values), [**EbomResourceReference**](./sample-jsons/attributes/types/ebomReferenceType.json)  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, [**i18nCurrency**](./sample-jsons/attributes/types/i18nCurrencyType.json) (Decimal that represents currency ammount in his i18n representation)... |
 |`productAttributes.value`| `Object` with the data of a certain valueType ||
 |`variants`| `Array` List of product variants ||
 |`variants.id`| Variant id ||
@@ -308,7 +311,7 @@ The product object has the general information of the product, the list of attri
             "attributes" : [
                 {
                     "name" : "color",
-                    "valueType" : "LabelValue",
+                    "valueType" : "KeyLabel",
                     "value" : {
                         "value" : 906,
                         "label" : "Black"
@@ -348,7 +351,7 @@ The product object has the general information of the product, the list of attri
             "attributes" : [
                 {
                     "name" : "color",
-                    "valueType" : "LabelValue",
+                    "valueType" : "KeyLabel",
                     "value" : {
                         "value" : 901,
                         "label" : "Blue"
@@ -403,10 +406,11 @@ The product reference identifies and categorizes a certain production channel
 |`variantId`| Id of variant which the reference belongs||
 |`attributes`| `Array` list of attributes that define the reference| Posible attribute types and resctrictions are defined in product schema|
 |`attributes.name`| name of the attribute||
-|`attribute.valueType`| Value type of current attribute. | **Label** (Enumerate string selected from a predefined set of values), **ValueLabel** (Enumerate string with key-value selected from a predefined set of values), **EbomResourceReference**  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, **i18nCurrency** (Decimal that represents currency ammount in his i18n representation)...
+|`attribute.valueType`| Value type of current attribute. | [**Label**](./sample-jsons/attributes/types/LabelType.json) (Enumerate string selected from a predefined set of values), [**KeyLabel**](./sample-jsons/attributes/types/KeyLabelType.json) (Enumerate string with key-value selected from a predefined set of values), [**EbomResourceReference**](./sample-jsons/attributes/types/ebomReferenceType.json)  (references a resource in this case is a ebom resource), **DateUTC**, **String**, **Integer**, **Decimal**, **Boolean**, [**i18nCurrency**](./sample-jsons/attributes/types/i18nCurrencyType.json) (Decimal that represents currency ammount in his i18n representation)...
 |`attribute.value`| `Object` with the data of a certain valueType ||
 |`attribute.visible`| Flag to define which attributes belongs to a visual representation of a certain reference.  **Ex:** 4004/765/901/L in the sample case, with the configured restrictions, the only attributes that are of interest to see to identify the reference are model,quality, color and size ||
 
+### Example of reference
 
 ```json
 [
@@ -435,7 +439,7 @@ The product reference identifies and categorizes a certain production channel
             },
             {
                 "name" : "color",
-                "valueType" : "ValueLabel",
+                "valueType" : "KeyLabel",
                 "value" : {
                     "value" : 901,
                     "label" : "Azul"
@@ -485,7 +489,7 @@ The product reference identifies and categorizes a certain production channel
             },
             {
                 "name" : "color",
-                "valueType" : "ValueLabel",
+                "valueType" : "KeyLabel",
                 "value" : {
                     "value" : 901,
                     "label" : "Azul"
@@ -512,4 +516,126 @@ The product reference identifies and categorizes a certain production channel
         ]
     }
 ]
+```
+
+## Attributes
+
+### KeyLabel attribute
+Attributes in which may define a key (Integer, string, decimal, boolean) and a value
+
+#### Fields
+|Field| Description | Values|
+|:---|:---| :---|
+|`id`| domain identification||
+|`name`| name of the attibute type ||
+|`keyName`| name used to create json key ||
+|`productTypeIds`| list of product types that can use current attribute ||
+|`keyDataType`| Data type of certain attribute ||
+|`items`| `Array` Set of values for the current attribute ||
+|`items.id`| id of a attribute item ||
+|`items.categories`| categories for which can use current attribute item ||
+|`items.label`| label for a certain key of one item ||
+|`items.key`| key for a certain attribute item. This key is unique in a certain attribute type (color...) ||
+
+
+#### Example of keyValue attributes
+```json
+{
+    "id" : "urn:brand:<zara-id>:label-value-attribute:<color-key-label-attribute>",
+    "name" : "Color",
+    "keyName" : "color", 
+    "productTypeIds": [
+        "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
+        "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
+    ],
+    "keyDataType": "Integer",
+    "items" : [
+        {
+            "id" : "<id-color-900>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "Black",
+            "key" : 900
+
+        },
+        {
+            "id" : "<id-color-701>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "Blue",
+            "key" : 701
+
+        },
+        {
+            "id" : "<id-color-705>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-woman-id>"
+            ],
+            "label": "Blue W",
+            "key" : 705
+
+        }
+
+
+    ]
+}
+```
+
+### Label attribute
+Attributes in which may define a enumerated list of strings
+
+#### Fields
+|Field| Description | Values|
+|:---|:---| :---|
+|`id`| domain identification||
+|`name`| name of the attibute type ||
+|`keyName`| name used to create json key ||
+|`productTypeIds`| list of product types that can use current attribute ||
+|`items`| `Array` Set of values for the current attribute ||
+|`items.id`| id of a attribute item ||
+|`items.categories`| categories for which can use current attribute item ||
+|`items.label`| label for a certain key of one item. This key is unique in a certain attribute type (model, quality...)||
+
+
+#### Example of label attributes
+```json
+{
+    "id" : "urn:brand:<zara-id>:label-value-attribute:<model-label-attribute>",
+    "name" : "model",
+    "keyName" : "Model", 
+    "productTypeIds": [
+        "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
+        "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
+    ],
+    "items" : [
+        {
+            "id" : "<id-model-4004>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "4004"
+
+        },
+        {
+            "id" : "<id-model-4005>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "4005"
+
+        },
+        {
+            "id" : "<id-model-3002>",
+            "categories" : [
+                "urn:brand:<zara-id>:section:<section-men-id>"
+            ],
+            "label": "3002"
+
+        }
+
+
+    ]
+}
 ```
