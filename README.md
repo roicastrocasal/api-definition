@@ -1,7 +1,17 @@
 # Product KERNEL-API
 
-## Product type schema
+### 1. [Product type schema](#product-type-schema)
+* #### 1.1 [Fields description](#fields-description-of-product-schema)
+* #### 1.2 [Sample JSON](#example-of-product-type-schema)
+### 2. [Product](#product)
+* #### 2.1 [Fields description](#fields-description-of-product)
+* #### 2.2 [Sample JSON](#example-of-product)
+### 3. [Product reference](#product-reference)
+* #### 3.1 [Fields description](#fields-description-of-product-reference)
+* #### 3.2 [Sample JSON](#example-of-reference)
 
+
+## Product type schema
 
 | Field                       | Description                                                                                                                                                                      | Values                                                                                                                                                                                                                                                                                                                                                                                          |
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
