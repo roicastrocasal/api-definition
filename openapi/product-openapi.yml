@@ -27,13 +27,13 @@ paths:
           content:
             application/json:    
               schema:
-                $ref: "#/components/schemas/Error"
-        default:
+                $ref: "#/components/schemas/Error404" 
+        '500':
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/Error500"
   /product/{product-id}:
     get:
       summary: retrieve a product by id
@@ -57,13 +57,13 @@ paths:
           content:
             application/json:    
               schema:
-                $ref: "#/components/schemas/Error"
-        default:
+                $ref: "#/components/schemas/Error404"
+        '500':
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/Error500"
   /product-reference/{product-reference-id}:
     get:
       summary: retrieve a product reference by id
@@ -87,13 +87,13 @@ paths:
           content:
             application/json:    
               schema:
-                $ref: "#/components/schemas/Error"
-        default:
+                $ref: "#/components/schemas/Error404"     
+        '500':
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/Error500"
 components:
   schemas:
     ProductSchema:
@@ -545,3 +545,22 @@ components:
           format: int32
         message:
           type: string
+    Error500:
+     allOf:
+      - $ref: "#/components/schemas/Error"
+      - type: object
+        properties:
+          code: 
+            example: 500
+          message: 
+            example: Internal server error
+    Error404:
+     allOf:
+      - $ref: "#/components/schemas/Error"
+      - type: object
+        properties:
+          code: 
+            example: 404
+          message: 
+            example: Entity not found
+                
