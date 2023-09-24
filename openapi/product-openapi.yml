@@ -22,6 +22,12 @@ paths:
             application/json:    
               schema:
                 $ref: "#/components/schemas/ProductSchema"
+        '404':
+          description: A product schema object not found
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Error"
         default:
           description: unexpected error
           content:
@@ -46,6 +52,12 @@ paths:
             application/json:    
               schema:
                 $ref: "#/components/schemas/Product"
+        '404':
+          description: Product object not found
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Error"
         default:
           description: unexpected error
           content:
@@ -65,11 +77,17 @@ paths:
         - product-reference
       responses:
         '200':
-          description: A product object
+          description: Product reference object
           content:
             application/json:    
               schema:
                 $ref: "#/components/schemas/ProductReference"
+        '404':
+          description: Product reference object not found
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Error"
         default:
           description: unexpected error
           content:
