@@ -1,0 +1,529 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Products
+  description: POC Product Kernel API
+paths:
+  /product-schema/{product-schema-id}:
+    get:
+      summary: retrieve a product schema by id
+      parameters:
+        - in: path
+          name: product-schema-id
+          schema:
+            type: string
+          required: true
+      tags:
+        - product-schema
+      responses:
+        '200':
+          description: A product schema object
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ProductSchema"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /product/{product-id}:
+    get:
+      summary: retrieve a product by id
+      parameters:
+        - in: path
+          name: product-id
+          schema:
+            type: string
+          required: true
+      tags:
+        - product
+      responses:
+        '200':
+          description: A product object
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Product"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /product-reference/{product-reference-id}:
+    get:
+      summary: retrieve a product reference by id
+      parameters:
+        - in: path
+          name: product-reference-id
+          schema:
+            type: string
+          required: true
+      tags:
+        - product-reference
+      responses:
+        '200':
+          description: A product object
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ProductReference"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    ProductSchema:
+      type: object
+      properties: 
+        id:
+          type: string
+          description : product schema id
+          example: "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>"
+        version:
+          type: number
+          description: version for concurrency management
+          example: 1
+        productType:
+          description: product type for which the schema exists. This product type is provided by categories BC
+          $ref: "#/components/schemas/ProductType"
+        categories:
+          type: array
+          description: Set of Categories node types provided by categories BC which we can associate to a certain product that implements this schema
+          items:
+            type: string
+          example: ["section","buyer","family","subfamily"]
+        attributes:
+          $ref: "#/components/schemas/SchemaAttribute"
+        states:
+          type: array
+          items:
+            $ref: "#/components/schemas/State"
+        references:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Reference"
+    ProductType:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>"
+        name: 
+          type: string
+          example: "Clothes Zara"
+    SchemaAttribute:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Id of attribute value (only in AttributeTypes with key)
+        name:
+          type: string
+          description: Attributte name (We can´t add more than one attribute with same name in a certain schema)
+        type: 
+          type: string
+          description: >
+            attribute types:
+              * **Label** (Enumerate string selected from a predefined set of values), 
+              * **KeyLabel** (Enumerate string with key-value selected from a predefined set of values)
+              * **EbomResourceReference** (references a resource in this case is a ebom resource)
+              * **DateUTC**
+              * **String**
+              * **Integer**
+              * **Decimal**
+              * **Boolean**
+              * **i18nCurrency** (Decimal that represents currency ammount in his i18n representation)
+          enum: 
+            - Label
+            - KeyLabel
+            - EbomResourceReference
+            - DateUTC
+            - String
+            - Integer
+            - Decimal
+            - i18nCurrency
+          example: KeyLabel
+        variant:
+          type: string
+          enum: 
+            - NOT_VARIABLE
+            - UNIQUE
+            - UNIQUE_GROUP
+            - NO_RESTRICTION
+          example: NOT_VARIABLE
+          description: >
+            restrictions for variation of attributes: 
+              * **NOT_VARIABLE** (Doesn´t define variant). 
+              * **UNIQUE** (Unique in all its variants).
+              * **UNIQUE_GROUP** (Combination of all unique_group must be unique)
+              * **NO_RESTRICTION** (Conforms variant without restriction)
+              * **OVERWRITABLE** (Attribute value may overwrite de product value in variant)
+              **Only NOT_VARIABLE AND NO_RESTRICTION can be `mandatory: false`**
+        multivaluated:
+          type: boolean
+          description: "Defines if current attribute can be multivaluated. Multivaluated fields can´t be `reference: true` and can´t be `variable: UNIQUE` or `variable: UNIQUE_GROUP` neither"
+        mandatory:
+          type: boolean
+          description: Defines if attribute definition is mandatory
+    State:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Custom state id
+          example: "urn:brand:<zara-id>:product-state-types:<clothes-state-type-id>"
+        name:
+          type: string
+          description: Custom state name
+          example: "ClothesState"
+        in:
+          type: string
+          description: where state can be present
+          enum: [PRODUCT_ROOT, VARIANT, BOTH]
+          example: PRODUCT_ROOT
+        values:
+          description: Array of posibles states of product root or variants
+          type: array
+          items: 
+            type: string
+          example: "[DRAFT,IN_DEVELOPMENT,OK]"
+        initial: 
+          type: string
+          description: Initial state (One of values)
+          example: IN_DEVELOPMENT
+        transitions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transition"
+    Transition:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Id of Transition
+          example: "<comercial-state-transition-1>"
+        from: 
+          type: string
+          description: Custom state where transition starts
+          example: DRAFT
+        to: 
+          type: string
+          description: Custom state where transition ends
+          example: OK
+    Reference:
+      type: object
+      description: Object that define a set of attributes that can be used to generate product references
+      properties:
+        inherited:
+          type: string
+          enum: [ALWAYS,NEVER,DEFAULT]
+          description: >
+            define if the reference tooks the product/variant attribute if it´s defined
+              * **ALWAYS** (The value of the attribute is inherited from product/variant and can´t be changed)
+              * **NEVER** (The attribute value never can be the same that its product/variant)
+              * **DEFAULT** (the value of attribute is the same that the product/variant if exists but it can be edited)
+              **ALWAYS only may exists if is defined in the product or variant**
+          example: ALWAYS
+        restriction:
+          type: string
+          enum: [UNIQUE, UNIQUE_GROUP,NO_RESTRICTION]
+          description: >
+            Defines reference attributes restriction
+              * **UNIQUE** (Unique in all its references).
+              * **UNIQUE_GROUP** (Combination of all unique_group must be unique)
+              * **NO_RESTRICTION** (any value is allowed)
+          example: UNIQUE_GROUP
+        visible:
+          type: boolean
+          description: Define if attribute reference is visible
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Product Id
+          example: "urn:product-type:<zara-ropa-id>:product:<product-id>"
+        version:
+          type: number
+          description: version for concurrency management
+          example: 1
+        name:
+          type: string
+          description: Name of product
+          example: Denim Trouser
+        description:
+          type: string
+          description: Description of product
+          example: Simple cotton denim men trouser
+        brandId:
+          type: string
+          description: Organization if of brand that owns the product development
+          example: "urn:brand:<zara-id>"
+        productTypeId:
+          type: string
+          description: Id of product type (served by Organization BC)
+          example: "urn:brand:<zara-id>:product-type:<product-type-clothes-id>"
+        productTypeSchema:
+          $ref: "#/components/schemas/ProductTypeSchemaId" 
+        states:
+          type: array
+          description: List of all states defined in product schema with their current state
+          items: 
+            $ref: "#/components/schemas/ProductState"
+        categories: 
+          type: array
+          items:
+            type: string
+          description: Defined Category ids according schema declaration
+          example: "['urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>']"   
+        attributes:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/AttributeLabel"
+              - $ref: "#/components/schemas/AttributeInt"
+              - $ref: "#/components/schemas/AttributeDate"    
+              - $ref: "#/components/schemas/AttributeKeyLabel"
+              - $ref: "#/components/schemas/AttributeKeyIntLabel" 
+              - $ref: "#/components/schemas/AttributeI18nCurrency"
+              - $ref: "#/components/schemas/AttributeEbomResourcereference"
+        variants:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Variant"
+    ProductTypeSchemaId:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Id of product schema
+          example: "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>"
+        name:
+          type: string
+          description: Name of product schema
+          example: "Clothes schema"
+    ProductState:
+      type: object
+      description: State of product root or variant
+      properties:
+        name:
+          type: string
+          description: Name of state type
+          example: ClothesState
+        state:
+          type: string
+          description: current state for certain state type
+          example: IN_DEVELOPMENT
+    Attribute:
+      type: object
+      properties:
+        name: 
+          type: string
+          description: String that representes the key name of a certain attribute
+          example: "<Some attribute type (color,model...)>"
+      discriminator:
+        propertyName: valueType
+        mapping:
+          Label: "#/components/schemas/AttributeLabel"
+          I18nCurrency: "#/components/schemas/AttributeI18nCurrency"
+          KeyIntLabel: "#/components/schemas/AttributeKeyIntLabel"
+          KeyLabel: "#/components/schemas/AttributeKeyLabel"
+          EbomResourceReference: "#/components/schemas/AttributeEbomResourcereference"
+          Integer: "#/components/schemas/AttributeInt"
+          Date: "#/components/schemas/AttributeDate"
+    AttributeLabel:
+      description: Object with representation for label type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - Label
+            value:
+              type: string
+              example: "4067"
+    AttributeInt:
+      description: Object with representation for Integer type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - Integer
+            value:
+              type: number
+              example: 200
+    AttributeDate:
+      description: Object with representation for date type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - Integer
+            value:
+              type: string
+              format: date-time
+    AttributeI18nCurrency:
+      description: Object with representation for i18nCurrency type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - KeyIntLabel
+            value:
+              type: object
+              properties:
+                value:
+                  type: number
+                  example: 29.90
+                currency:
+                  type: string
+                  example: "€"
+                  enum:
+                    - "€"
+                    - "$"
+    AttributeKeyLabel:
+      description: Object with representation for a key(string) label(string) type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - KeyLabel
+            value:
+              type: object
+              properties:
+                key:
+                  type: string
+                  example: "#ffffff"
+                label:
+                  type: string
+                  example: Blanco
+    AttributeKeyIntLabel:
+      description: Object with representation for key(Int) label(string)  type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - KeyIntLabel
+            value:
+              type: object
+              properties:
+                key:
+                  type: number
+                  example: 1
+                label:
+                  type: string
+                  example: Talla letras
+    AttributeEbomResourcereference:
+      description: Object with representation for ebom reference type
+      allOf: 
+        - $ref: "#/components/schemas/Attribute"
+        - type: object
+          properties:
+            valueType: 
+              type: string
+              enum:
+                - EbomResourceReference
+            value:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                  example: "[EBOM] Pantalon Especial china"   
+    Variant:
+      type: object
+      description: Object with product attributes variations
+      properties:
+        id: 
+          description: Variant id
+          type: string
+          example: "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>"
+        attributes: 
+          type: array
+          description: Set of attributes defined for the variant
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/AttributeLabel"
+              - $ref: "#/components/schemas/AttributeInt"
+              - $ref: "#/components/schemas/AttributeDate"    
+              - $ref: "#/components/schemas/AttributeKeyLabel"
+              - $ref: "#/components/schemas/AttributeKeyIntLabel" 
+              - $ref: "#/components/schemas/AttributeI18nCurrency"
+              - $ref: "#/components/schemas/AttributeEbomResourcereference"
+        states: 
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductState"
+    ProductReference:
+      type: object
+      description: The product reference identifies and categorizes a certain production channel
+      properties:
+        id:
+          type: string
+          description: domain identification
+          example: "<urn:brand:<brand-zara-id>:product-type:<clothes-type-id>:reference:<reference-1-id>"
+        gtin:
+          type: string
+          description: Global Trade Identification Number
+          example: 54375676867987697
+        productTypeId:
+          type: string
+          description: Product type identifier
+          example: "urn:product-type:<zara-clothes-id>"
+        productTypeSchema:
+          $ref: "#/components/schemas/ProductTypeSchemaId"
+        productId:
+          type: string
+          description: Product id of the reference
+          example: "urn:product-type:<zara-ropa-id>:product:<product-id>"
+        variantId:
+          type: string
+          description: Id of variant which the reference belongs
+          example: "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>"
+        attributes:
+          type: array
+          description: Set of attributes defined for the variant
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/AttributeLabel"
+              - $ref: "#/components/schemas/AttributeInt"
+              - $ref: "#/components/schemas/AttributeDate"    
+              - $ref: "#/components/schemas/AttributeKeyLabel"
+              - $ref: "#/components/schemas/AttributeKeyIntLabel" 
+              - $ref: "#/components/schemas/AttributeI18nCurrency"
+              - $ref: "#/components/schemas/AttributeEbomResourcereference"
+          
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

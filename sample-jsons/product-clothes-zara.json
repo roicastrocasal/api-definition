@@ -1,143 +1,130 @@
 {
-    "id": "urn:product-type:<zara-ropa-id>:product:<product-id>",
-    "name" : "Denim trouser",
-    "description" : "Simple cotton denim men trouser",
-    "brandId" : "urn:brand:<zara-id>",
-    "productTypeId" : "urn:brand:<zara-id>:product-type:<product-type-ropa-id>",
-    "productTypeSchema" : {
-        "id" : "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>",
-        "name" : "Clothes Zara schema"
+  "id": "urn:product-type:<zara-ropa-id>:product:<product-id>",
+  "version": 1,
+  "name": "Denim trouser",
+  "description": "Simple cotton denim men trouser",
+  "brandId": "urn:brand:<zara-id>",
+  "productTypeId": "urn:brand:<zara-id>:product-type:<product-type-ropa-id>",
+  "productTypeSchema": {
+    "id": "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>",
+    "name": "Clothes Zara schema"
+  },
+  "states": [
+    {
+      "name": "ClothesState",
+      "state": "DEVELOPMENT"
+    }
+  ],
+  "categories": [
+    "urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>",
+    "urn:brand:<zara-id>:section:<section-men-id>:family:<family-pantalon-id>",
+    "urn:brand:<zara-id>:section:<section-men-id>:subfamily:<subfamily-wtrouser-id>",
+    "urn:brand:<zara-id>:section:<section-men-id>:first-commercial-attribute:<first-comercial-attribute-cotton-trouser-id>"
+  ],
+  "attributes": [
+    {
+      "name": "model",
+      "valueType": "Label",
+      "value": "4004"
     },
-    "states" : [{
-        "name" : "ClothesState",
-        "state" : "DEVELOPMENT"
-    }],
-    "categories" : [
-        "urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>",
-        "urn:brand:<zara-id>:section:<section-men-id>:family:<family-pantalon-id>",
-        "urn:brand:<zara-id>:section:<section-men-id>:subfamily:<subfamily-wtrouser-id>",
-        "urn:brand:<zara-id>:section:<section-men-id>:first-commercial-attribute:<first-comercial-attribute-cotton-trouser-id>"
-    ],
-    "attributes" : [
+    {
+      "name": "quality",
+      "valueType": "Label",
+      "value": "765"
+    },
+    {
+      "name": "basePrice",
+      "valueType": "i18nCurrency",
+      "value": {
+        "currency": "€",
+        "amount": 10.99,
+        "locale": "es-ES"
+      }
+    },
+    {
+      "name": "denim",
+      "valueType": "Boolean",
+      "value": true
+    },
+    {
+      "name": "sizeSystem",
+      "valueType": "Label",
+      "value": "Letters"
+    }
+  ],
+  "variants": [
+    {
+      "id": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
+      "attributes": [
         {
-            "name" : "model",
-            "valueType" : "Label",
-            "value" : "4004"  
+          "name": "color",
+          "valueType": "KeyLabel",
+          "value": {
+            "key": 906,
+            "label": "Black"
+          }
         },
         {
-            "name" : "quality",
-            "valueType" : "Label",
-            "value" :  "765"  
+          "name": "size",
+          "valueType": "Label",
+          "value": "L"
         },
         {
-            "name" : "basePrice",
-            "valueType" : "i18nCurrency",
-            "value" : {
-                "currency" : "€",
-                "amount" : 10.99,
-                "locale" : "es-ES"
-            }
-        },
-        {
-            "name" : "denim",
-            "valueType" : "Boolean",
-            "value" : true
-        },
-        {
-            "name" : "sizeSystem",
-            "valueType" : "Label",
-            "value" :  "Letters"
-            
-        }  
-        
-    ],
-    "variants" : [
-        {
-            "id": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
-            "attributes" : [
-                {
-                    "name" : "color",
-                    "valueType" : "KeyLabel",
-                    "value" : {
-                        "key" : 906,
-                        "label" : "Black"
-                    }
-                },
-                {
-                    "name" : "size",
-                    "valueType" : "Label",
-                    "value" : "L"
-                    
-                },
-                {
-                    "name" : "ebom",
-                    "valueType" : "EbomResourceReference",
-                    "value" : {
-                        "resourceType" : "ebom",
-                        "resourceId" : "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
-                        "name" : "EBOM de pantalón de algodon"
-                    }
-                    
-                }
-            ],
-            "states":[
-                {
-                    "name" : "ClothesState",
-                    "state" : "DEVELOPMENT"
-                },
-                {
-                    "name" : "CommercialState",
-                    "state" : "PENDING_COMMERCIAL"
-                }
-
-            ]
-        },
-        {
-            "id": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-2-id>",
-            "attributes" : [
-                {
-                    "name" : "color",
-                    "valueType" : "KeyLabel",
-                    "value" : {
-                        "key" : 901,
-                        "label" : "Blue"
-                    }
-                },
-                {
-                    "name" : "size",
-                    "valueType" : "Label",
-                    "value" : "L"
-                    
-                },
-                {
-                    "name" : "ebom",
-                    "valueType" : "EbomResourceReference",
-                    "value" : {
-                        "resourceId" : "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
-                        "name" : "EBOM de pantalón de algodon"
-                    }
-                    
-                }
-            ],
-            "states":[
-                {
-                    "name" : "ClothesState",
-                    "state" : "DRAFT"
-                },
-                {
-                    "name" : "CommercialState",
-                    "state" : "DEVELOPMENT"
-                }
-
-            ]
+          "name": "ebom",
+          "valueType": "EbomResourceReference",
+          "value": {
+            "resourceType": "ebom",
+            "resourceId": "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+            "name": "EBOM de pantalón de algodon"
+          }
         }
-    ]
-
-        
-
-    
-
- 
-
-
+      ],
+      "states": [
+        {
+          "name": "ClothesState",
+          "state": "DEVELOPMENT"
+        },
+        {
+          "name": "CommercialState",
+          "state": "PENDING_COMMERCIAL"
+        }
+      ]
+    },
+    {
+      "id": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-2-id>",
+      "attributes": [
+        {
+          "name": "color",
+          "valueType": "KeyLabel",
+          "value": {
+            "key": 901,
+            "label": "Blue"
+          }
+        },
+        {
+          "name": "size",
+          "valueType": "Label",
+          "value": "L"
+        },
+        {
+          "name": "ebom",
+          "valueType": "EbomResourceReference",
+          "value": {
+            "resourceId": "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+            "name": "EBOM de pantalón de algodon"
+          }
+        }
+      ],
+      "states": [
+        {
+          "name": "ClothesState",
+          "state": "DRAFT"
+        },
+        {
+          "name": "CommercialState",
+          "state": "DEVELOPMENT"
+        }
+      ]
+    }
+  ]
 }
