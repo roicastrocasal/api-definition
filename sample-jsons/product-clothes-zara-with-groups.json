@@ -76,7 +76,7 @@
           "name": "color",
           "valueType": "KeyLabel",
           "value": {
-            "key": 901,
+            "key": 906,
             "label": "Black"
           }
         },
@@ -84,13 +84,21 @@
           "name": "size",
           "valueType": "Label",
           "value": "L"
+        },
+        {
+          "name": "ebom",
+          "valueType": "EbomResourceReference",
+          "value": {
+            "resourceType": "ebom",
+            "resourceId": "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+            "name": "EBOM de pantalón de algodon"
+          }
         }
       ],
-      "links" : [],
       "marks": [
         {
           "name": "ClothesMark",
-          "mark": "DEVELOPMENT"
+          "state": "DEVELOPMENT"
         },
         {
           "name": "CommercialMark",
@@ -114,9 +122,16 @@
           "name": "size",
           "valueType": "Label",
           "value": "L"
+        },
+        {
+          "name": "ebom",
+          "valueType": "EbomResourceReference",
+          "value": {
+            "resourceId": "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+            "name": "EBOM de pantalón de algodon"
+          }
         }
       ],
-      "links" : [],
       "states": [
         {
           "name": "ClothesState",
@@ -128,70 +143,5 @@
         }
       ]
     }
-  ],
-  "managementUnits" : [
-    {
-      "id": "<management-unit-color-id>",
-      "name" : "color",
-      "links" : [
-        {
-          "id" : 901,
-          "data" : [
-            {
-              "name": "image",
-              "valueType": "ImageResourceReference",
-              "value": "urn:image-color-901"
-            },
-            {
-              "name": "image",
-              "valueType": "PantoneResourceReference",
-              "value": "urn:<pantone-color-black-1001>"
-            } 
-          ] 
-        },
-        {
-          "id" : 701,
-          "data" : [
-            {
-              "name": "image",
-              "valueType": "ImageResourceReference",
-              "value": "urn:image-color-701"
-            },
-            {
-              "name": "image",
-              "valueType": "PantoneResourceReference",
-              "value": "urn:<pantone-color-blue-1002>"
-            } 
-          ] 
-        }
-      ]
-    },
-    {
-      "id": "<management-unit-size-id>",
-      "name" : "size",
-      "links" : [
-        {
-          "id" : "XL",
-          "data" : [
-            {
-              "name": "measurements",
-              "valueType": "MeasurementsResourceReference",
-              "value": "urn:measurements-xl-reference"
-            } 
-          ] 
-        },
-        {
-          "id" : "L",
-          "data" : [
-            {
-              "name": "measurements",
-              "valueType": "MeasurementsResourceReference",
-              "value": "urn:measurements-l-reference"
-            } 
-          ] 
-        }
-      ]
-    }
-
   ]
 }

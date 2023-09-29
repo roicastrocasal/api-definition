@@ -1,0 +1,36 @@
+{
+    "id" : "<variant-1-id>",
+    "urn": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
+    "productRef" : "urn:product-type:<zara-ropa-id>:product:<product-id>",
+    "ref" : "906/L",
+    "state" : {
+      "id" : "<state-id-1>",
+      "state": "DEVELOPMENT"
+    }, 
+    "attributes": [
+      {
+        "name": "color",
+        "valueType": "KeyLabel",
+        "value": {
+          "key": 901,
+          "label": "Black"
+        }
+      },
+      {
+        "name": "size",
+        "valueType": "Label",
+        "value": "L"
+      }
+    ],
+    "links" : [],
+    "marks": [
+      {
+        "name": "ClothesMark",
+        "mark": "DEVELOPMENT"
+      },
+      {
+        "name": "CommercialMark",
+        "state": "PENDING_COMMERCIAL"
+      }
+    ]
+  }
