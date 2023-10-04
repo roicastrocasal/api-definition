@@ -23,12 +23,12 @@
     },
     "marks": [
       {
-        "name": "DevelopmentMark",
-        "mark": "DEVELOPMENT"
+        "name": "QualityMark",
+        "mark": "IN DEVELOPMENT"
       },
       {
         "name": "LegalMark",
-        "mark": "NOT OK"
+        "mark": "PENDING"
       }
     ],
     
@@ -57,20 +57,64 @@
     "variants" : [
         {
             "name" : "color",
+            "valueType" : "LabelKey",
             "values" : [
-                {
-                    "key": 800,
-                    "label": "Red"
+              {
+                "value" : {
+                  "key": 701,
+                  "label": "Blue"
                 },
-                {
-                    "key": 701,
-                    "label": "Blue"
-                }
+                "data" : []
+              },
+              {
+                "value" : {
+                  "key": 800,
+                  "label": "Red"
+                },
+                "data" : [
+                  {
+                    "name": "image",
+                    "valueType": "ImageResourceReference",
+                    "value": "urn:image-color-800"
+                  },
+                  {
+                    "name": "basePrice",
+                    "valueType": "I18nCurrency",
+                    "value": {
+                      "currency": "€",
+                      "amount": 19.99,
+                      "locale": "es-ES"
+                    }
+                  } 
+                ]
+              }
+                
             ]
         },
         {
             "name" : "size",
-            "values" : ["M","L","XL"]
+            "values" : [
+              {
+                "value" : "XL",
+                "data" : [
+                  {
+                    "name": "measurements",
+                    "valueType": "measurementResourceReference",
+                    "value": "urn:product:measurements:<xl-measurement-id>"
+                  }
+                ]
+              },
+              {
+                "value" : "L",
+                "data" : [
+                  {
+                    "name": "measurements",
+                    "valueType": "measurementResourceReference",
+                    "value": "urn:product:measurements:<xl-measurement-id>"
+                  }
+                ]
+              }
+            ]
         }
     ]
 }

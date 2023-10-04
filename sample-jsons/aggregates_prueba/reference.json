@@ -1,0 +1,49 @@
+
+{
+  "id": "<reference-1-id>",
+  "refKey": "<urn:brand:<brand-zara-id>:product-type:<clothes-type-id>:reference:<reference-1-id>",
+  "ref" : "4004/765/901/L",
+  "version": 1,
+  "gtin": 134239483209234,
+  "productTypeId": "urn:product-type:<zara-ropa-id>",
+  "productTypeSchema": {
+    "id": "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>",
+    "name": "Clothes Zara schema"
+  },
+  "productRef": "urn:product-type:<zara-ropa-id>:product:<product-id>",
+  "variantRef": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
+  "attributes": [
+    {
+      "name": "model",
+      "valueType": "Label",
+      "value": "4004"
+    },
+    {
+      "name": "quality",
+      "valueType": "Label",
+      "value": "765"
+    },
+    {
+      "name": "color",
+      "valueType": "ValueLabel",
+      "value": {
+        "value": 901,
+        "label": "Azul"
+      }
+    },
+    {
+      "name": "size",
+      "valueType": "Label",
+      "value": "L"
+    },
+    {
+      "name": "ebom",
+      "valueType": "EbomResourceReference",
+      "value": {
+        "resourceId": "urn:brand:<brand-zara-id>:ebom:<ebom-pantalon-algodon-basico>",
+        "name": "EBOM de pantalón de algodon"
+      }
+    }
+  ]
+}
+

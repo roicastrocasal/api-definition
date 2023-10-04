@@ -6,7 +6,8 @@
     "id": "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>",
     "name": "Clothes Zara"
   },
-  "categories": ["section", "buyer", "family", "subfamily"],
+  // No tener en cuenta para ejercicio de grupos
+  "categories": [ "buyer-code", "family", "subfamily"],
   "attributes": [
     {
       "id": "urn:zara:ropa:attribute:<model-type-id>",
@@ -17,12 +18,20 @@
       "mandatory": true
     },
     {
-      "id": "urn:zara:ropa:attribute:<model-type-id>",
+      "id": "urn:zara:ropa:attribute:<quality-type-id>",
       "name": "quality",
       "type": "Label",
       "variant": "NOT_VARIABLE",
       "multivaluated": false,
       "mandatory": true
+    },
+    {
+      "id": "urn:zara:ropa:attribute:<base-price-type-id>",
+      "name": "basePrice",
+      "type": "i18nCurrency",
+      "variant": "OVERWRITABLE",
+      "multivaluated": false,
+      "mandatory": false
     },
     {
       "id": "urn:zara:ropa:attribute:<color-type-id>",
@@ -42,36 +51,27 @@
       "mandatory": true
     },
     {
-      "id": "urn:zara:ropa:attribute:<ebom-reference-type-id>",
-      "name": "ebom",
-      "type": "EbomResourceReference",
-      "variant": "UNIQUE_GROUP",
-      "multivaluated": false,
-      "mandatory": true
-    },
-    {
-      "id": "urn:zara:ropa:attribute:<base-price-type-id>",
-      "name": "basePrice",
-      "type": "Label",
-      "variant": "NOT_VARIABLE",
+      "id": "urn:zara:ropa:attribute:<image-reference-type-id>",
+      "name": "image",
+      "type": "ImageResourceReference",
+      "variant" : "NO_RESTRICTION",
       "multivaluated": false,
       "mandatory": false
     },
     {
-      "id": "urn:zara:ropa:attribute:<size-system-type-id>",
-      "name": "sizeSystem",
-      "type": "Label",
-      "variant": "NOT_VARIABLE",
+      "id": "urn:<measurements-reference-type-id>",
+      "name": "measurement",
+      "type": "MeasurementsResourceReference",
+      "variant" : "NO_RESTRICTION",
       "multivaluated": false,
-      "mandatory": true
+      "mandatory": false
     }
   ],
-  "managementUnitsTypes" : [
+  "managementGroups" : [
     {
       "id" : "<management-unit-type-color-id>",
-      "name": "Color group",
-      "field": "color",
-      "linkedTypes" :   [
+      "name": "color",
+      "data" :   [
         {
           "id": "urn:zara:ropa:attribute:<image-reference-type-id>",
           "name": "image",
@@ -80,9 +80,9 @@
           "mandatory": true
         },
         {
-          "id": "urn:zara:ropa:attribute:<pantone-reference-type-id>",
-          "name": "pantone",
-          "type": "PantoneResourceReference",
+          "id": "urn:zara:ropa:attribute:<price-reference-type-id>",
+          "name": "basePrice",
+          "type": "PriceResourceReference",
           "multivaluated": false,
           "mandatory": true
         }
@@ -95,7 +95,7 @@
       "linkedTypes" :   [
         {
           "id": "urn:<measurements-reference-type-id>",
-          "name": "image",
+          "name": "measure",
           "type": "MeasurementsResourceReference",
           "multivaluated": false,
           "mandatory": true
@@ -106,21 +106,20 @@
   "marks": [
     {
       "id": "urn:brand:<zara-id>:product-state-types:<clothes-mark-type-id>",
-      "name": "ClothesMark",
+      "name": "QualityMark",
       "in": "BOTH",
-      "values": ["DEVELOPMENT", "OK"],
-      "initial": "DEVELOPMENT",
-      "transitions": [
-        {
-          "id": "<comercial-state-transition-1>",
-          "from": "DEVELOPMENT",
-          "to": "OK"
-        }
-      ]
+      "values": ["IN DEVELOPMENT", "QUALITY OK"],
+      "default": "DEVELOPMENT"
+    },
+    {
+      "id": "urn:brand:<zara-id>:product-state-types:<clothes-mark-type-id>",
+      "name": "LegalMark",
+      "in": "BOTH",
+      "values": ["PENDING", "NOT OK", "OK"],
+      "default": "PENDING"
     }
   ],
   "references": {
-    "visibleDelimiter" : "/",
     "attributes": [
       {
         "id": "urn:zara:ropa:attribute:<model-type-id>",
@@ -161,6 +160,7 @@
         "restriction": "NOT_RESTRICTION",
         "visible": false
       }
-    ]
+    ],
+    "visibleDelimiter" : "/"
   }
 }

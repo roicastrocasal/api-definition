@@ -1,7 +1,8 @@
 {
     "id" : "urn:brand:<zara-id>:label-value-attribute:<model-label-attribute>",
     "name" : "model",
-    "keyName" : "Model", 
+    "keyName" : "model", 
+    "type" : "Label",
     "productTypeIds": [
         "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
         "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"

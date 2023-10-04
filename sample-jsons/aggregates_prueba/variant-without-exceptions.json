@@ -2,7 +2,7 @@
     "id" : "<variant-1-id>",
     "refKey": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
     "productRefKey" : "urn:product-type:<zara-ropa-id>:product:<product-id>",
-    "ref" : "906/L",
+    "ref" : "800/L",
     "state" : {
       "id" : "<state-id-1>",
       "state": "DEVELOPMENT"
@@ -12,7 +12,7 @@
         "name": "color",
         "valueType": "KeyLabel",
         "value": {
-          "key": 901,
+          "key": 800,
           "label": "Red"
         }
       },
@@ -24,12 +24,12 @@
     ],
     "marks": [
       {
-        "name": "ClothesMark",
-        "mark": "DEVELOPMENT"
+        "name": "QualityMark",
+        "mark": "IN DEVELOPMENT"
       },
       {
-        "name": "CommercialMark",
-        "state": "PENDING_COMMERCIAL"
+        "name": "LegalMark",
+        "mark": "PENDING"
       }
     ]
   }

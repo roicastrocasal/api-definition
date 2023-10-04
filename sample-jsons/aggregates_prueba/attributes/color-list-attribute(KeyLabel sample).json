@@ -2,6 +2,8 @@
     "id" : "urn:brand:<zara-id>:label-value-attribute:<color-key-label-attribute>",
     "name" : "color",
     "keyName" : "Color", 
+    "masterCatalog" : "<mater-catalog-color-id>",
+    "type" : "keyLabel",
     "productTypeIds": [
         "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
         "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
@@ -10,29 +12,32 @@
     "items" : [
         {
             "id" : "<id-color-900>",
+            "masterCatalogItemId" : 123,
             "categories" : [
                 "urn:brand:<zara-id>:section:<section-men-id>"
             ],
-            "label": "Black",
+            "label": "Rojo atardecer",
             "key" : 900
 
         },
         {
             "id" : "<id-color-701>",
+            "masterCatalogItemId" : 456,
             "categories" : [
                 "urn:brand:<zara-id>:section:<section-men-id>"
             ],
-            "label": "Blue",
+            "label": "9808",
             "key" : 701
 
         },
         {
             "id" : "<id-color-705>",
+            "masterCatalogItemId" : 789,
             "categories" : [
                 "urn:brand:<zara-id>:section:<section-woman-id>"
             ],
             "label": "Blue W",
-            "key" : 705
+            "key" : 800
 
         }
 
