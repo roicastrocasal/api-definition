@@ -117,11 +117,68 @@ components:
             type: string
           example: ["section","buyer","family","subfamily"]
         attributes:
-          $ref: "#/components/schemas/SchemaAttribute"
-        states:
+          example:
+            - id: "urn:zara:ropa:attribute:<model-type-id>"
+              name: "model"
+              type: "Label"
+              variant: "NOT_VARIABLE"
+              multivaluated: false
+              mandatory: true
+            - id: "urn:zara:ropa:attribute:<quality-type-id>"
+              name: "quality"
+              type: "Label"
+              variant: "NOT_VARIABLE"
+              multivaluated: false
+              mandatory: true
+            - id: "urn:zara:ropa:attribute:<base-price-type-id>"
+              name: "basePrice"
+              type: "i18nCurrency"
+              variant: "OVERWRITABLE"
+              multivaluated: false
+              mandatory: false
+            - id: "urn:zara:ropa:attribute:<color-type-id>"
+              name: "color"
+              type: "KeyLabel"
+              variant: "UNIQUE_GROUP"
+              multivaluated: false
+              mandatory: true
+            - id: "urn:zara:ropa:attribute:<size-type-id>"
+              name: "size"
+              type: "Label"
+              variant: "UNIQUE_GROUP"
+              multivaluated: false
+              mandatory: true
+            - id: "urn:zara:ropa:attribute:<image-reference-type-id>"
+              name: "image"
+              type: "ImageResourceReference"
+              variant : "NO_RESTRICTION"
+              multivaluated: false
+              mandatory: false
+            - id: "urn:<measurements-reference-type-id>"
+              name: "measurement"
+              type: "MeasurementsResourceReference"
+              variant : "NO_RESTRICTION"
+              multivaluated: false
+              mandatory: false
           type: array
           items:
-            $ref: "#/components/schemas/State"
+            $ref: "#/components/schemas/SchemaAttribute"
+        marks:
+          type: array
+          example:
+            - id: "urn:brand:<zara-id>:product-state-types:<clothes-mark-type-id>"
+              name: "QualityMark"
+              in: "BOTH"
+              values: ["IN DEVELOPMENT", "QUALITY OK"]
+              default: "DEVELOPMENT"  
+            - id: "urn:brand:<zara-id>:product-state-types:<clothes-mark-type-id>"
+              name: "LegalMark"
+              in: "BOTH"
+              values: ["PENDING", "NOT OK", "OK"]
+              default: "PENDING"
+    
+          items:
+            $ref: "#/components/schemas/Mark"
         references:
           type: array
           items: 
@@ -189,7 +246,7 @@ components:
         mandatory:
           type: boolean
           description: Defines if attribute definition is mandatory
-    State:
+    Mark:
       type: object
       properties:
         id:
@@ -215,26 +272,48 @@ components:
           type: string
           description: Initial state (One of values)
           example: IN_DEVELOPMENT
-        transitions:
-          type: array
-          items:
-            $ref: "#/components/schemas/Transition"
-    Transition:
+    Reference:
       type: object
       properties:
-        id: 
+        delimiter:
           type: string
-          description: Id of Transition
-          example: "<comercial-state-transition-1>"
-        from: 
-          type: string
-          description: Custom state where transition starts
-          example: DRAFT
-        to: 
-          type: string
-          description: Custom state where transition ends
-          example: OK
-    Reference:
+          example: "/"
+        attributes:
+          example: 
+            - id: "urn:zara:ropa:attribute:<model-type-id>"
+              name: "model"
+              type: "Label"
+              inherited: "DEFAULT"
+              restriction: "UNIQUE_GROUP"
+              visible: true
+            - id: "urn:zara:ropa:attribute:<model-type-id>"
+              name: "quality"
+              type: "Label"
+              inherited: "DEFAULT"
+              restriction: "UNIQUE_GROUP"
+              visible: true 
+            - id: "urn:zara:ropa:attribute:<color-type-id>"
+              name: "color"
+              type: "KeyLabel"
+              inherited: "ALWAYS"
+              restriction: "UNIQUE_GROUP"
+              visible: true
+            - id: "urn:zara:ropa:attribute:<size-type-id>"
+              name: "size"
+              type: "Label"
+              inherited: "ALWAYS"
+              restriction: "UNIQUE_GROUP"
+              visible: true
+            - id: "urn:zara:ropa:attribute:<ebom-reference-type-id>"
+              name: "ebom"
+              type: "EbomResourceReference"
+              restriction: "NOT_RESTRICTION"
+              inherited: "DEFAULT"
+              visible: false
+          type: array
+          items:
+            $ref: "#/components/schemas/ReferenceAttribute" 
+    ReferenceAttribute:
       type: object
       description: Object that define a set of attributes that can be used to generate product references
       properties:
@@ -267,6 +346,14 @@ components:
           type: string
           description: Product Id
           example: "urn:product-type:<zara-ropa-id>:product:<product-id>"
+        refKey:
+          type: string
+          description: readable unique reference for a tenant URN
+          example: "urn:product-type:<zara-ropa-id>:product:<product-id>"
+        ref: 
+          type: string
+          description: configurable readable reference for root product. No need to be unique in tenant. It can be autogenerated with schema references info
+          example: "4004/765"
         version:
           type: number
           description: version for concurrency management
@@ -302,6 +389,19 @@ components:
           example: "['urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>']"   
         attributes:
           type: array
+          example: 
+            - name: model
+              valueType: Label
+              value: 4004
+            - name: "quality"
+              valueType: Label
+              value: 404
+            - name: basePrice
+              valueType: i18nCurrency
+              value:
+                currency: "€"
+                amount: 10.99
+                locale: "es-ES"
           items:
             oneOf:
               - $ref: "#/components/schemas/AttributeLabel"
@@ -315,6 +415,48 @@ components:
           type: array
           items: 
             $ref: "#/components/schemas/Variant"
+          example:
+            - name: color
+              values: 
+                - name: color
+                  valueType: KeyLabel
+                  value:
+                    key: 701
+                    label: Blue
+                  data: []
+                - name: color
+                  valueType: KeyLabel
+                  value: 
+                    key: 800
+                    label: Read
+                  data:
+                    - name: basePrice
+                      valueType: i18nCurrency
+                      value:
+                        currency: $
+                        amount: 10,99
+                        locale: es-ES
+            - name: size
+              values: 
+                - name: size
+                  valueType: Label
+                  value: XL
+                  data:
+                    - name: ebom
+                      valueType: EbomResourceReference
+                      value: 
+                        name: EBOM XL
+                        id: <id-ebom-xl>
+                - name: size
+                  valueType: Label
+                  value: L
+                  data:
+                    - name: ebom
+                      valueType: EbomResourceReference
+                      value: 
+                        name: EBOM L
+                        id: <id-ebom-L>
+                       
     ProductTypeSchemaId:
       type: object
       properties:
@@ -357,6 +499,10 @@ components:
           Date: "#/components/schemas/AttributeDate"
     AttributeLabel:
       description: Object with representation for label type
+      example:
+        name: model
+        valueType: Label
+        value: 4004
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -370,6 +516,7 @@ components:
               example: "4067"
     AttributeInt:
       description: Object with representation for Integer type
+      example: 
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -383,6 +530,7 @@ components:
               example: 200
     AttributeDate:
       description: Object with representation for date type
+      example:
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -396,6 +544,12 @@ components:
               format: date-time
     AttributeI18nCurrency:
       description: Object with representation for i18nCurrency type
+      example: 
+        name: basePrice
+        valueType: i18nCurrency
+        value:
+          value: 29,99
+          currency: "$"
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -418,6 +572,12 @@ components:
                     - "$"
     AttributeKeyLabel:
       description: Object with representation for a key(string) label(string) type
+      example:
+        name: color
+        valueType: KeyLabel
+        value:
+          key: 901
+          label: Negro
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -431,12 +591,18 @@ components:
               properties:
                 key:
                   type: string
-                  example: "#ffffff"
+                  example: ffffff
                 label:
                   type: string
                   example: Blanco
     AttributeKeyIntLabel:
       description: Object with representation for key(Int) label(string)  type
+      example: 
+        name: sizeSystem
+        valueType: KeyIntLabel
+        value: 
+          key: 1
+          label: Talla letras
       allOf: 
         - $ref: "#/components/schemas/Attribute"
         - type: object
@@ -471,18 +637,12 @@ components:
                   type: string
                 name:
                   type: string
-                  example: "[EBOM] Pantalon Especial china"   
-    Variant:
+                  example: "[EBOM] Pantalon Especial china" 
+    AttributeData:
       type: object
-      description: Object with product attributes variations
       properties:
-        id: 
-          description: Variant id
-          type: string
-          example: "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>"
-        attributes: 
+        data:
           type: array
-          description: Set of attributes defined for the variant
           items:
             oneOf:
               - $ref: "#/components/schemas/AttributeLabel"
@@ -492,6 +652,30 @@ components:
               - $ref: "#/components/schemas/AttributeKeyIntLabel" 
               - $ref: "#/components/schemas/AttributeI18nCurrency"
               - $ref: "#/components/schemas/AttributeEbomResourcereference"
+    Variant:
+      type: object
+      description: Object with product attributes variations
+      properties:
+        name:
+          type: string
+          example: "color"
+        valueType:
+          type: string
+          example: Label
+        values: 
+          type: array
+          description: Set of attributes defined for the variant
+          items:
+            allOf:
+              - oneOf:
+                - $ref: "#/components/schemas/AttributeLabel"
+                - $ref: "#/components/schemas/AttributeInt"
+                - $ref: "#/components/schemas/AttributeDate"    
+                - $ref: "#/components/schemas/AttributeKeyLabel"
+                - $ref: "#/components/schemas/AttributeKeyIntLabel" 
+                - $ref: "#/components/schemas/AttributeI18nCurrency"
+                - $ref: "#/components/schemas/AttributeEbomResourcereference"
+              - $ref: "#/components/schemas/AttributeData"
         states: 
           type: array
           items:

@@ -634,8 +634,8 @@ Attributes in which may define a enumerated list of strings
 ```json
 {
   "id": "urn:brand:<zara-id>:label-value-attribute:<model-label-attribute>",
-  "name": "model",
-  "keyName": "Model",
+  "name": "Model",
+  "keyName": "model",
   "productTypeIds": [
     "urn:brand:<zara-id>:product-type:<product-type-clothes-id>",
     "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
