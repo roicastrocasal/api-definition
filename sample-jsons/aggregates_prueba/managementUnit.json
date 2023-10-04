@@ -1,0 +1,25 @@
+{
+    "id": "<management-unit-color-901-id>",
+    "refKey": "urn:product-type:12441234:management-unit:1234544",
+    "managementUnitId" : "<management-unit-type-color-id>",
+    "productRefKey": "urn:product-type:<zara-ropa-id>:product:<product-id>",
+    "version" : 1,
+    "name" : "color",
+    "key" : 800,
+    "links" : [
+      {
+        "name": "image",
+        "valueType": "ImageResourceReference",
+        "value": "urn:image-color-800"
+      },
+      {
+        "name": "basePrice",
+        "valueType": "I18nCurrency",
+        "value": {
+          "currency": "€",
+          "amount": 19.99,
+          "locale": "es-ES"
+        }
+      } 
+    ] 
+  }

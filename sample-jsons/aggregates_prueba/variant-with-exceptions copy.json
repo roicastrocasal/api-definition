@@ -1,0 +1,43 @@
+{
+    "id" : "<variant-1-id>",
+    "refKey": "urn:product-type:<zara-ropa-id>:product:<product-id>:variant:<variant-1-id>",
+    "productRefKey" : "urn:product-type:<zara-ropa-id>:product:<product-id>",
+    "ref" : "906/L",
+    "state" : {
+      "id" : "<state-id-1>",
+      "state": "DEVELOPMENT"
+    }, 
+    "attributes": [
+      {
+        "name": "color",
+        "valueType": "KeyLabel",
+        "value": {
+          "key": 901,
+          "label": "Red"
+        }
+      },
+      {
+        "name": "size",
+        "valueType": "Label",
+        "value": "M"
+      },
+      {
+        "name": "image",
+        "type": "ImageResourceReference",
+        "value" : {
+          "referenceId" : "<id-image-1>"
+        }
+      }
+    ],
+    "links" : [],
+    "marks": [
+      {
+        "name": "ClothesMark",
+        "mark": "DEVELOPMENT"
+      },
+      {
+        "name": "CommercialMark",
+        "state": "PENDING_COMMERCIAL"
+      }
+    ]
+  }

@@ -1,0 +1,76 @@
+{
+    "id" : "<product-id>",
+    "refKey": "urn:product-type:<zara-ropa-id>:product:<product-id>",
+    "ref" :  "4004/765",
+    "version": 1,
+    "name": "Denim trouser",
+    "description": "Simple cotton denim men trouser",
+    "brandId": "urn:brand:<zara-id>",
+    "productTypeId": "urn:brand:<zara-id>:product-type:<product-type-ropa-id>",
+    "productTypeSchema": {
+      "id": "urn:brand:<brand-zara-id>:product-type:<product-type-clothes-id>:product-schema:<product-schema-clothes-id>",
+      "name": "Clothes Zara schema"
+    },
+    "categories": [
+      "urn:brand:<zara-id>:section:<section-men-id>:section:<man-section>",
+      "urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>",
+      "urn:brand:<zara-id>:section:<section-men-id>:family:<family-pantalon-id>",
+      "urn:brand:<zara-id>:section:<section-men-id>:subfamily:<subfamily-wtrouser-id>"
+    ],
+    "state" : {
+      "id" : "<state-id>",
+      "name": "Draft"
+    },
+    "marks": [
+      {
+        "name": "DevelopmentMark",
+        "mark": "DEVELOPMENT"
+      },
+      {
+        "name": "LegalMark",
+        "mark": "NOT OK"
+      }
+    ],
+    
+    "attributes": [
+      {
+        "name": "model",
+        "valueType": "Label",
+        "value": "4004"
+      },
+      {
+        "name": "quality",
+        "valueType": "Label",
+        "value": "765"
+      },
+      {
+        "name": "basePrice",
+        "valueType": "i18nCurrency",
+        "value": {
+          "currency": "€",
+          "amount": 10.99,
+          "locale": "es-ES"
+        }
+      }
+      
+    ],
+    "variants" : [
+        {
+            "name" : "color",
+            "values" : [
+                {
+                    "key": 800,
+                    "label": "Red"
+                },
+                {
+                    "key": 701,
+                    "label": "Blue"
+                }
+            ]
+        },
+        {
+            "name" : "size",
+            "values" : ["M","L","XL"]
+        }
+    ]
+}
