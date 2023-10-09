@@ -1,0 +1,115 @@
+{
+    "id" : "<product-id>",
+    "refKey": "urn:product-type:<zara-fabric-id>:product:<product-id>",
+    "ref" :  "765",
+    "version": 1,
+    "name": "Cotton viscosa",
+    "description": "Simple cotton ",
+    "brandId": "urn:brand:<zara-id>",
+    "productTypeId": "urn:brand:<zara-id>:product-type:<product-type-ropa-id>",
+    "productTypeSchema": {
+      "id": "urn:brand:<brand-zara-id>:product-type:<product-type-fabric-id>:product-schema:<product-schema-fabric-id>",
+      "name": "Fabric Zara schema"
+    },
+    "categories": [
+      "urn:brand:<zara-id>:section:<section-men-id>:section:<man-section>",
+      "urn:brand:<zara-id>:section:<section-men-id>:buyer:<buyer-man-collection-a-id>",
+      "urn:brand:<zara-id>:section:<section-men-id>:family:<family-pantalon-id>",
+      "urn:brand:<zara-id>:section:<section-men-id>:subfamily:<subfamily-wtrouser-id>"
+    ],
+    "state" : {
+      "id" : "<state-id>",
+      "name": "Draft"
+    },
+    "marks": [
+      {
+        "name": "QualityMark",
+        "mark": "IN DEVELOPMENT"
+      },
+      {
+        "name": "LegalMark",
+        "mark": "PENDING"
+      }
+    ],
+    
+    "attributes": [
+      {
+        "name": "quality",
+        "valueType": "Label",
+        "value": "765"
+      }
+      
+    ],
+    "variants" : [
+        {
+            "name" : "color",
+            "valueType" : "LabelKey",
+            "values" : [
+              {
+                "value" : {
+                  "key": 701,
+                  "label": "Blue"
+                },
+                "data" : []
+              },
+              {
+                "value" : {
+                  "key": 800,
+                  "label": "Red"
+                },
+                "data" : []
+              }  
+            ]
+        },
+        {
+          
+          "name": "print",
+          "valueType": "String",
+          "values": ["Squares", "Flowers"]
+          
+        },
+        {
+          "name" : "composition",
+          "valueType" : "KeyLabelGroup",
+          "values" : [
+            {
+              "value" : {
+                  "groupName" : "Cotton 100 All Better",
+                  "values" : [
+                      {
+                          "key" : "cotton",
+                          "label" : "100"
+                      },
+                      {
+                          "key" : "better",
+                          "value" : "100"
+                      }
+                  ]
+              },
+              "data" : []
+            },
+            {
+              "value" : {
+                "groupName" : "Cotton 90 viscosa 50 better",
+                "values" : [
+                    {
+                        "key" : "cotton",
+                        "label" : "99"
+                    },
+                    {
+                        "key" : "elastano",
+                        "value" : "1"
+                    },
+                    {
+                        "key" : "better",
+                        "value" : "50"
+                    }
+                ]
+              },
+              "data" : []
+            }
+
+          ]
+        }
+    ]
+}

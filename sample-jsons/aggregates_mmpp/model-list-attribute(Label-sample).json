@@ -1,0 +1,15 @@
+{
+    "id" : "urn:brand:<zara-id>:label-value-attribute:<composition-keylabelgroup-attribute>",
+    "name" : "Composition",
+    "keyName" : "composition", 
+    "type" : "KeyLabelGroup",
+    "productTypeIds": [
+        "urn:brand:<zara-id>:product-type:<product-type-fabrics-id>"
+    ],
+    "keys" : [
+        "cotton",
+        "poliester",
+        "elastano",
+        "better"
+    ]
+}
